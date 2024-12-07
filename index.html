@@ -50,25 +50,44 @@
     </form>
 
     <script>
-        ry {
-    const response = await fetch('https://script.google.com/macros/s/AKfycbzxYPrs0v0_Opkw0Fr5Wq9Z3IZrUGFNU3y8I3o47PImGu95Fm5Z3r24QOBnDtKx5rZt/exec', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
+        document.addEventListener('DOMContentLoaded', function() {
+  const form = document.querySelector('#form'); // Selecione seu formulário pelo ID
+  const urlScript = 'https://script.google.com/macros/s/AKfycbzxYPrs0v0_Opkw0Fr5Wq9Z3IZrUGFNU3y8I3o47PImGu95Fm5Z3r24QOBnDtKx5rZt/exec'; // Substitua com seu Script ID real
+  const successPage = 'https://rodolfocoprodutor.github.io/whastappenvio/download.html'; // Substitua com a URL real do seu eBook
 
-    if (response.ok) {
-      alert('Dados enviados com sucesso!');
-      window.location.href = 'link-para-download-do-ebook.pdf';
-    } else {
-      throw new Error('Erro na resposta do servidor');
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault(); // Impede o comportamento padrão de envio de formulário
+
+    // Captura os dados do formulário
+    const formData = {
+      nome: document.querySelector('#nome').value,
+      email: document.querySelector('#email').value,
+      whatsapp: document.querySelector('#whatsapp').value,
+    };
+
+    try {
+      // Envia os dados via fetch para o Google Apps Script
+      const response = await fetch(urlScript, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      // Verifica se a resposta foi bem-sucedida
+      if (response.ok) {
+        // Redireciona o usuário para a página de download do eBook
+        window.location.href = successPage;
+      } else {
+        // Exibe um erro caso algo tenha dado errado
+        alert('Erro ao enviar os dados. Tente novamente.');
+      }
+    } catch (error) {
+      console.error('Erro ao enviar os dados:', error);
+      alert('Erro ao enviar os dados. Tente novamente.');
     }
-  } catch (error) {
-    console.error('Erro ao enviar os dados:', error);
-    alert('Erro ao enviar os dados. Tente novamente.');
-  }
+  });
 });
 
     </script>
