@@ -43,15 +43,21 @@
 <body>
     <h2>Baixe o Seu eBook Gratuito!</h2>
     <form id="form">
-  <input type="text" id="nome" placeholder="Seu nome" required>
-  <input type="email" id="email" placeholder="Seu email" required>
-  <input type="text" id="whatsapp" placeholder="Seu WhatsApp" required>
-  <button type="submit">Enviar</button>
+      <input type="text" id="nome" placeholder="Seu nome" required>
+      <input type="email" id="email" placeholder="Seu email" required>
+      <input type="text" id="whatsapp" placeholder="Seu WhatsApp" required>
+      <button type="submit">Enviar</button>
     </form>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-  const form = document.querySelector('#form'); // Selecione seu formulário pelo ID
+  const form = document.querySelector('#form'); // Certifique-se de que o ID está correto
+
+  if (!form) {
+    console.error('Formulário não encontrado!');
+    return; // Impede o restante do código de ser executado se o formulário não for encontrado
+  }
+
   const urlScript = 'https://script.google.com/macros/s/AKfycbzxYPrs0v0_Opkw0Fr5Wq9Z3IZrUGFNU3y8I3o47PImGu95Fm5Z3r24QOBnDtKx5rZt/exec'; // Substitua com seu Script ID real
   const successPage = 'https://rodolfocoprodutor.github.io/whastappenvio/download.html'; // Substitua com a URL real do seu eBook
 
