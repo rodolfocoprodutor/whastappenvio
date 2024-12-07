@@ -58,7 +58,7 @@
   const whatsapp = document.getElementById('whatsapp').value;
 
   try {
-    const response = await fetch('https://script.google.com/macros/s/AKfycbw14XReptEDf4lZqUn6mshc_dFFUpPWoPA9xQY6OkEFd5YwoV-nptfYnJQn_mhlnVk/exec', {
+    const response = await fetch('https://script.google.com/macros/s/AKfycbxkPXYenWH8fbQ_BLrgkqX2kRxDONn9tKLVbKYZy-dUHFRByE8qx0r7U3JvnuPZ7NRx/exec', {
       method: 'POST',
       body: JSON.stringify({ nome, email, whatsapp }),
       headers: { 'Content-Type': 'application/json' }
