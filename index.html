@@ -51,23 +51,32 @@
 
     <script>
         document.getElementById('leadForm').addEventListener('submit', async function(event) {
-            event.preventDefault();
+  event.preventDefault();
 
-            const nome = document.getElementById('nome').value;
-            const email = document.getElementById('email').value;
-            const whatsapp = document.getElementById('whatsapp').value;
+  const nome = document.getElementById('nome').value;
+  const email = document.getElementById('email').value;
+  const whatsapp = document.getElementById('whatsapp').value;
 
-            try {
-                await fetch('https://script.google.com/macros/s/AKfycby_T9kFwub9DXc989skTOkKrPx6SfSTws4ie9KsPn1m2yyCAQLfbW5RDVnl-zVGqwK6/exec', {
-                    method: 'POST',
-                    body: JSON.stringify({ nome, email, whatsapp }),
-                    headers: { 'Content-Type': 'application/json' }
-                });
-                window.location.href = 'download.html';  // Página de download do eBook
-            } catch (error) {
-                alert('Erro ao enviar os dados. Tente novamente.');
-            }
-        });
+  try {
+    const response = await fetch('https://script.google.com/macros/s/SEU_SCRIPT_ID/exec', {
+      method: 'POST',
+      body: JSON.stringify({ nome, email, whatsapp }),
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Erro HTTP: ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log(result);
+    window.location.href = 'download.html';  // Redireciona para a página de download
+  } catch (error) {
+    console.error('Erro ao enviar os dados:', error);
+    alert('Erro ao enviar os dados. Tente novamente.');
+  }
+});
+
     </script>
 </body>
 </html>
