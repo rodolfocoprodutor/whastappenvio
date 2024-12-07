@@ -50,27 +50,32 @@
     </form>
 
     <script>
-        document.getElementById('leadForm').addEventListener('submit', async function(event) {
-  event.preventDefault();
+        const form = document.getElementById('formulario');
 
-  const nome = document.getElementById('nome').value;
-  const email = document.getElementById('email').value;
-  const whatsapp = document.getElementById('whatsapp').value;
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const formData = {
+    nome: document.getElementById('nome').value,
+    email: document.getElementById('email').value,
+    whatsapp: document.getElementById('whatsapp').value,
+  };
 
   try {
-    const response = await fetch('https://script.google.com/macros/s/AKfycbxkPXYenWH8fbQ_BLrgkqX2kRxDONn9tKLVbKYZy-dUHFRByE8qx0r7U3JvnuPZ7NRx/exec', {
+    const response = await fetch('https://script.google.com/macros/s/SEU_SCRIPT_ID/exec', {
       method: 'POST',
-      body: JSON.stringify({ nome, email, whatsapp }),
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
     });
 
-    if (!response.ok) {
-      throw new Error(`Erro HTTP: ${response.status}`);
+    if (response.ok) {
+      alert('Dados enviados com sucesso!');
+      window.location.href = 'link-para-download-do-ebook.pdf';
+    } else {
+      throw new Error('Erro na resposta do servidor');
     }
-
-    const result = await response.json();
-    console.log(result);
-    window.location.href = 'download.html';  // Redireciona para a página de download
   } catch (error) {
     console.error('Erro ao enviar os dados:', error);
     alert('Erro ao enviar os dados. Tente novamente.');
